@@ -148,10 +148,10 @@
   function loadMap() {
     const css = document.createElement("link");
     css.rel = "stylesheet";
-    css.href = "vendor/leaflet.css";
+    css.href = "vendor/leaflet.css?v=a7837102";
     document.head.appendChild(css);
     const script = document.createElement("script");
-    script.src = "vendor/leaflet.js";
+    script.src = "vendor/leaflet.js?v=db49d009";
     script.onload = initMap;
     script.onerror = () => { $("#map-fallback").textContent = "The map couldn't load. The label below still shows the demo QR."; };
     document.head.appendChild(script);
