@@ -246,7 +246,8 @@
   async function post(body) {
     if (!ENDPOINT) throw new Error("no endpoint");
     const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 15000);
+    // Apps Script can take 15 seconds or more on its first call after a quiet spell.
+    const timer = setTimeout(() => controller.abort(), 40000);
     try {
       const response = await fetch(ENDPOINT, { method: "POST", body: JSON.stringify(body), headers: { "Content-Type": "text/plain;charset=utf-8" }, signal: controller.signal });
       const json = await response.json();
@@ -287,6 +288,7 @@
     }
     const button = $("#lead-btn");
     button.disabled = true; button.textContent = "Saving…";
+    const slow = setTimeout(() => { button.textContent = "Still saving, one moment…"; }, 6000);
     try {
       const result = await post({ type: "lead", name, agency: agencyName, whatsapp, website: String(data.get("website") || ""), elapsed: Date.now() - startedAt, page });
       leadId = result.id; leadToken = result.token; leadName = name; leadAgency = agencyName;
@@ -296,6 +298,7 @@
     } catch {
       showError(error, "We couldn't save that just now.", waLink(`Assalam o Alaikum Moiz, I'm ${name} from ${agencyName}. I'd like to join the DeliveryPin pilot.`));
     } finally {
+      clearTimeout(slow);
       button.disabled = false; button.textContent = "Join the pilot";
     }
   });
