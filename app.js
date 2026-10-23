@@ -103,8 +103,44 @@
       status.innerHTML = `Pin is about <span id="dist">${metres}</span> m from Ayesha's gate.`;
       status.classList.remove("ok");
     }
-    if (moved) { track("pin_moved"); landmark.classList.remove("flash"); void landmark.offsetWidth; landmark.classList.add("flash"); }
+    if (moved) { track("pin_moved"); flash(landmark); updateAddress(point, metres <= EXACT_METRES); }
     renderQr(point);
+  }
+
+  const flash = (element) => { element.classList.remove("flash"); void element.offsetWidth; element.classList.add("flash"); };
+
+  /* Address details follow the pin, as in the real popup. On the gate the demo address is shown;
+     anywhere else the street and area come from OpenStreetMap's Nominatim (one lookup per pin drop). */
+  const DEMO_ADDRESS = "House 27, Street 4, B-Block, Satellite Town, Rawalpindi";
+  let addressTimer = 0, addressController = null;
+  function setAddress(text) {
+    for (const id of ["#f-address", "#l-address"]) { const element = $(id); element.textContent = text; flash(element); }
+  }
+  function formatAddress(address) {
+    const street = [address.house_number, address.road].filter(Boolean).join(" ");
+    const area = address.neighbourhood || address.suburb || address.quarter || address.residential || address.village;
+    const city = (address.city || address.town || address.county || address.state_district || "").replace(/^(Metropolitan|Municipal) Corporation\s+/i, "");
+    return [street, area, city].filter(Boolean).filter((part, index, all) => all.indexOf(part) === index).join(", ");
+  }
+  function updateAddress(point, onGate) {
+    clearTimeout(addressTimer);
+    addressController?.abort();
+    if (onGate) { setAddress(DEMO_ADDRESS); return; }
+    $("#f-address").textContent = "Finding the address for this pin…";
+    // Nominatim allows one request a second, so wait until the pin settles.
+    addressTimer = setTimeout(async () => {
+      const controller = new AbortController();
+      addressController = controller;
+      try {
+        const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&zoom=18&addressdetails=1&accept-language=en&lat=${point[0].toFixed(6)}&lon=${point[1].toFixed(6)}`;
+        const response = await fetch(url, { signal: controller.signal });
+        const body = await response.json();
+        if (controller.signal.aborted) return;
+        setAddress((body.address && formatAddress(body.address)) || "Address details not found here: the customer types them in");
+      } catch {
+        if (!controller.signal.aborted) setAddress("Address lookup unavailable: the customer types the address in");
+      }
+    }, 700);
   }
 
   updatePin(BLOCK_CENTRE, false);
