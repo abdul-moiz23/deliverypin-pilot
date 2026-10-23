@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DeliveryPin Pilot</title>
+<meta name="description" content="Customers drop an exact map pin at checkout. A QR code on the courier label takes the rider straight to the door. Join the free DeliveryPin pilot.">
+<meta name="theme-color" content="#F5F7FA">
+<meta name="color-scheme" content="light">
+<meta property="og:title" content="DeliveryPin pilot: stop paying shipping twice">
+<meta property="og:description" content="Exact map pin at checkout, QR on the courier label, rider scans and drives to the door. Free for pilot stores.">
+<meta property="og:image" content="media/demo-poster.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2C9.4 2 4 7.2 4 13.7 4 22.4 16 30 16 30s12-7.6 12-16.3C28 7.2 22.6 2 16 2z' fill='%23F2501A'/%3E%3Crect x='11' y='9' width='10' height='9' rx='1.5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&display=swap">
+<link rel="preload" as="image" href="media/loop-poster.jpg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-row">
+    <a class="brand" href="#top" aria-label="DeliveryPin">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path d="M16 2C9.4 2 4 7.2 4 13.7 4 22.4 16 30 16 30s12-7.6 12-16.3C28 7.2 22.6 2 16 2z" fill="#F2501A"/><rect x="11" y="9" width="10" height="9" rx="1.5" fill="#fff"/></svg>
+      <span>Delivery<b>Pin</b></span>
+    </a>
+    <a class="btn btn-small" href="#pilot" data-cta="header">Join the pilot</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 1. Hook -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow" id="prepared" hidden></p>
+      <h1>Your brands are paying shipping twice.</h1>
+      <p class="lede">Every COD parcel that comes back costs two-way shipping and the ad that sold it. DeliveryPin gets the customer's exact map pin at checkout and prints it on the label as a QR the rider scans.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#pilot" data-cta="hero">Join the pilot</a>
+        <a class="link-play" href="#film" data-cta="film">Watch the 90-second demo</a>
+      </div>
+      <p class="microline">Free during the pilot · Setup in minutes · No coding</p>
+    </div>
+    <div class="hero-media">
+      <video class="loop" autoplay muted loop playsinline preload="auto" poster="media/loop-poster.jpg" aria-label="DeliveryPin demo: the customer drops a pin, a QR code is printed on the label, the rider scans it for directions">
+        <source src="media/loop.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Problem -->
+<section class="problem">
+  <div class="wrap narrow">
+    <h2>"Masjid ke peeche wali gali." <span class="accent">Kaunsi masjid?</span></h2>
+    <p class="big">"Bhai location bhej dein?" Your clients' teams say it all day, then copy WhatsApp pins onto parcels by hand. When the rider still can't find the house, the parcel goes RTO and the brand pays both ways.</p>
+    <ul class="cost">
+      <li><span>Forward shipping</span></li>
+      <li><span>Return shipping</span></li>
+      <li><span>The ad that got the order</span></li>
+      <li><span>Stock stuck in transit</span></li>
+    </ul>
+    <p class="fine">Pakistani COD return rates are widely reported at roughly 15–30% in many categories. That is an industry estimate, not a DeliveryPin figure.</p>
+  </div>
+</section>
+
+<!-- 3. How it works + live demo -->
+<section class="how" id="how">
+  <div class="wrap">
+    <h2 class="section-title">Pin it. Print it. <span class="accent">Deliver it.</span></h2>
+    <ol class="steps">
+      <li>
+        <span class="num">1</span>
+        <h3>Customer pins it</h3>
+        <p>When they tap Checkout or Buy it now, a map opens first. "Use my current location", or drag the pin to the gate. The nearest landmark can fill in automatically, plus fields for entrance and instructions. A manual address option means no one is blocked.</p>
+      </li>
+      <li>
+        <span class="num">2</span>
+        <h3>You print it</h3>
+        <p>Upload the PostEx label PDF and a QR code goes under every label. The PDF is processed in your browser. For other couriers, print QR sticker slips with the order number.</p>
+      </li>
+      <li>
+        <span class="num">3</span>
+        <h3>Rider scans it</h3>
+        <p>Any phone camera opens Google Maps directions to the pin. No rider app, no courier integration.</p>
+      </li>
+    </ol>
+
+    <div class="demo" id="demo">
+      <div class="demo-head">
+        <p class="kicker">Try it</p>
+        <h3 id="demo-prompt">The written address puts the pin in the middle of the block. Drag it to Ayesha's gate.</h3>
+      </div>
+      <div class="demo-grid">
+        <div class="phone-card">
+          <div class="map-wrap">
+            <div id="map" role="application" aria-label="Demo map. Drag the orange pin, or tap the map to move it."></div>
+            <div class="map-fallback" id="map-fallback">Loading map…</div>
+          </div>
+          <dl class="fields">
+            <div><dt>Delivery address</dt><dd>House 27, Street 4, B-Block, Satellite Town, Rawalpindi</dd></div>
+            <div><dt>Nearest landmark</dt><dd id="f-landmark">Madina Masjid</dd></div>
+            <div><dt>Apartment, floor, unit, gate</dt><dd>Upper portion, 1st floor</dd></div>
+            <div><dt>Delivery instructions</dt><dd>Gate 2, ring bell</dd></div>
+          </dl>
+          <p class="demo-status" id="demo-status" aria-live="polite">Pin: block centre, about <span id="dist">–</span> m from the gate.</p>
+        </div>
+
+        <div class="label-card" aria-label="Demo courier label">
+          <p class="label-caption">PostEx-style label, demo data</p>
+          <div class="label">
+            <div class="label-rows">
+              <div><span>Consignee</span><b>Ayesha Khan</b></div>
+              <div><span>Phone</span><b>0300-0000000</b></div>
+              <div><span>Address</span><b>House 27, Street 4, B-Block, Satellite Town, Rawalpindi</b></div>
+              <div class="two"><div><span>Order Ref</span><b>#1012</b></div><div><span>COD</span><b>Rs 3,450</b></div></div>
+            </div>
+            <div class="label-nav">
+              <p class="nav-title">Rider Navigation</p>
+              <a id="qr-link" class="qr" href="#" target="_blank" rel="noopener" data-cta="qr" aria-label="Open the rider's Google Maps directions"><span id="qr"></span></a>
+              <p class="nav-sub">Scan for Google Maps directions to the delivery pin</p>
+            </div>
+          </div>
+          <p class="label-hint"><span class="hint-desktop">Scan the QR with your phone camera:</span><span class="hint-mobile">Scan it with another phone, or</span> <a id="qr-open" href="#" target="_blank" rel="noopener" data-cta="qr">open what the rider sees →</a></p>
+          <p class="fine">The QR updates every time you move the pin. It is a plain Google Maps link, the same kind the app prints.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Film -->
+<section class="film" id="film">
+  <div class="wrap">
+    <h2 class="section-title">The full flow in 92 seconds</h2>
+    <p class="sub">Checkout, the merchant's order, the QR on the label, the rider scanning it. Captions are on the video.</p>
+    <div class="film-frame">
+      <video id="film-video" controls playsinline preload="none" poster="media/demo-poster.jpg" aria-label="DeliveryPin product demo, 92 seconds, with captions"></video>
+      <button class="film-play" id="film-play" type="button" aria-label="Play the demo with sound"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg><span>Play with sound</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Agency -->
+<section class="agency">
+  <div class="wrap">
+    <h2 class="section-title">For agencies: <span class="accent">one playbook for every brand.</span></h2>
+    <p class="sub" id="agency-sub">Fashion, cosmetics, electronics or home: every COD brand has the same address problem.</p>
+    <div class="cards">
+      <article>
+        <h3>Same setup in every store</h3>
+        <p>Install, then turn on the app embed in Theme → Customize → App embeds. No code, no theme edits. Your team can do one brand in minutes and repeat it.</p>
+      </article>
+      <article>
+        <h3>A number to show the client</h3>
+        <p>Each store's dashboard shows total orders, customer-confirmed and missing locations, capture rate and GPS accuracy.</p>
+        <div class="metrics" aria-hidden="true"><div><b>Capture rate</b><span>per store</span></div><div><b>Confirmed</b><span>locations</span></div><div><b>Accuracy</b><span>in metres</span></div></div>
+      </article>
+      <article>
+        <h3>Works across couriers</h3>
+        <p>PostEx labels get the QR printed on them. For TCS, Leopards and others, print QR slips, or send us a sample label and we add the format.</p>
+      </article>
+    </div>
+    <p class="straight"><b>Straight talk:</b> each store installs DeliveryPin separately and has its own dashboard. There is no combined agency view yet. That is exactly the kind of thing pilot feedback should shape.</p>
+  </div>
+</section>
+
+<!-- 6. Calculator -->
+<section class="calc" id="numbers">
+  <div class="wrap">
+    <h2 class="section-title">Your numbers</h2>
+    <p class="sub">Put in one brand's numbers. Every starting value is an example: change it.</p>
+    <div class="calc-grid">
+      <form class="calc-inputs" id="calc" novalidate>
+        <label>Orders a month<input type="number" inputmode="numeric" min="0" step="1" id="c-orders"></label>
+        <label>RTO rate (%)<input type="number" inputmode="decimal" min="0" max="100" step="0.5" id="c-rto"></label>
+        <label>Two-way shipping per parcel (Rs)<input type="number" inputmode="numeric" min="0" step="10" id="c-ship"></label>
+        <label>Ad cost per order (Rs)<input type="number" inputmode="numeric" min="0" step="10" id="c-ad"></label>
+      </form>
+      <div class="calc-out" aria-live="polite">
+        <div class="out-row"><span>Parcels coming back each month</span><b id="o-returns">–</b></div>
+        <div class="out-row"><span>Each one costs about</span><b id="o-each">–</b></div>
+        <div class="out-row total"><span>Your RTOs cost about</span><b id="o-total">–</b><small>a month, in shipping and ad spend alone</small></div>
+        <div class="saved">
+          <label for="c-saved">If the rider finds the door on <b id="o-saved-n">10</b> of those parcels</label>
+          <input type="range" id="c-saved" min="0" max="100" step="1" value="10">
+          <p>that's about <b id="o-saved">–</b> back.</p>
+        </div>
+      </div>
+    </div>
+    <p class="fine">Your numbers, simple multiplication. Not a prediction or a guarantee.</p>
+  </div>
+</section>
+
+<!-- 7. Privacy -->
+<section class="privacy">
+  <div class="wrap">
+    <h2 class="section-title">Safe to put on a client's store</h2>
+    <ul class="checks">
+      <li><b>Only when the customer asks.</b> Location is requested after the customer taps for it. No background tracking.</li>
+      <li><b>Nothing sold, nothing shared.</b> No location data is sold, and nothing is sent to couriers.</li>
+      <li><b>Labels stay on your computer.</b> The label PDF is processed in your browser.</li>
+      <li><b>You set the retention.</b> Choose how long locations are kept (180 days by default). Customer deletion requests are handled.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 8. Pilot + form -->
+<section class="pilot" id="pilot">
+  <div class="wrap pilot-grid">
+    <div class="pilot-terms">
+      <h2 class="section-title">The pilot</h2>
+      <dl class="terms">
+        <div><dt>Cost</dt><dd>Free during the pilot.</dd></div>
+        <div><dt>Length</dt><dd>7 days or 100 confirmed orders per store, whichever comes first.</dd></div>
+        <div><dt>What we ask</dt><dd>Honest feedback on what works and what doesn't.</dd></div>
+        <div><dt>Seats</dt><dd>5 stores at a time.</dd></div>
+        <div><dt>How it starts</dt><dd>DeliveryPin is in Shopify App Store review now. Once it's listed, you install it on the stores you pick and we start your pilot.</dd></div>
+        <div><dt>After the pilot</dt><dd>Nothing is charged automatically. We talk before anything changes.</dd></div>
+      </dl>
+    </div>
+
+    <div class="form-card">
+      <form id="lead" novalidate>
+        <p class="step-label">Step 1 of 2</p>
+        <h3>Save your seat</h3>
+        <label>Your name<input name="name" autocomplete="name" required maxlength="80"></label>
+        <label>Agency<input name="agency" autocomplete="organization" required maxlength="120" id="f-agency"></label>
+        <label>WhatsApp number<input name="whatsapp" type="tel" autocomplete="tel" inputmode="tel" required maxlength="32" placeholder="03xx xxxxxxx"></label>
+        <label class="hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+        <p class="form-error" id="lead-error" role="alert" hidden></p>
+        <button class="btn btn-block" type="submit" id="lead-btn">Join the pilot</button>
+        <p class="fine">We only use these details to contact you about the pilot.</p>
+      </form>
+
+      <form id="details" novalidate hidden>
+        <p class="step-label">Step 2 of 2 · optional</p>
+        <h3>Seat saved. Tell us about your brands.</h3>
+        <label>Email<input name="email" type="email" autocomplete="email" maxlength="120"></label>
+        <label>Brands or store URLs<textarea name="brands" rows="3" maxlength="600" placeholder="brand1.pk, brand2.com…"></textarea></label>
+        <label>Monthly orders (all brands)<input name="orders" inputmode="numeric" maxlength="40"></label>
+        <fieldset><legend>Couriers you use</legend>
+          <div class="chips">
+            <label><input type="checkbox" name="couriers" value="PostEx"><span>PostEx</span></label>
+            <label><input type="checkbox" name="couriers" value="TCS"><span>TCS</span></label>
+            <label><input type="checkbox" name="couriers" value="Leopards"><span>Leopards</span></label>
+            <label><input type="checkbox" name="couriers" value="Trax"><span>Trax</span></label>
+            <label><input type="checkbox" name="couriers" value="M&amp;P"><span>M&amp;P</span></label>
+            <label><input type="checkbox" name="couriers" value="Call Courier"><span>Call Courier</span></label>
+            <label><input type="checkbox" name="couriers" value="Other"><span>Other</span></label>
+          </div>
+        </fieldset>
+        <label>Main problem right now<textarea name="problem" rows="3" maxlength="1000" placeholder="RTO on one brand, confirmation calls, riders calling…"></textarea></label>
+        <p class="form-error" id="details-error" role="alert" hidden></p>
+        <button class="btn btn-block" type="submit" id="details-btn">Send details</button>
+        <button class="btn-text" type="button" id="details-skip">Skip for now</button>
+      </form>
+
+      <div class="next" id="next" hidden>
+        <p class="step-label">You're in</p>
+        <h3>What happens next</h3>
+        <ol>
+          <li>Abdul Moiz will WhatsApp you from <b>+92 334 5251333</b> within 24 hours.</li>
+          <li>We pick which stores go first and check which courier label each one prints.</li>
+          <li>Once DeliveryPin is listed on the Shopify App Store, you install it and we start the pilot.</li>
+        </ol>
+        <a class="btn btn-ghost btn-block" id="wa-next" href="#" target="_blank" rel="noopener" data-cta="whatsapp">Message Moiz on WhatsApp now</a>
+        <p class="fine" id="next-ref"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. FAQ -->
+<section class="faq">
+  <div class="wrap narrow">
+    <h2 class="section-title">Questions sellers ask</h2>
+    <details><summary>Customers won't bother with a map.</summary><p>It's one tap: "Use my current location". It appears right when they hit checkout, and there's a manual address option, so no one is blocked. Capture is optional, so not every order will have a pin, and the dashboard shows you how many do.</p></details>
+    <details><summary>My courier doesn't support this.</summary><p>No courier integration is needed. The rider scans a QR on the label with any phone camera. PostEx label PDFs are supported today. For other couriers, print QR slips, or send us a sample label and we add the format.</p></details>
+    <details><summary>Is it hard to set up?</summary><p>Install it, then turn it on in Online Store → Themes → Customize → App embeds. No code.</p></details>
+    <details><summary>What about customer privacy?</summary><p>Location is only requested after the customer chooses it. There's no tracking, no data sold and nothing sent to couriers. Retention and deletion controls are built in.</p></details>
+    <details><summary>Will it slow the store down?</summary><p>The popup loads only when the customer goes to checkout, and the address details appear before the optional landmark lookup.</p></details>
+    <details><summary>Can't we just ask for a WhatsApp location?</summary><p>You can, for every order, by hand, and then copy it onto each parcel. DeliveryPin collects it at checkout and prints it on the label as a QR.</p></details>
+    <details><summary>Do the brands need Shopify Plus?</summary><p>No. The map popup works on every Shopify plan. DeliveryPin is for Shopify stores only.</p></details>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-grid">
+    <div>
+      <p class="brand"><svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><path d="M16 2C9.4 2 4 7.2 4 13.7 4 22.4 16 30 16 30s12-7.6 12-16.3C28 7.2 22.6 2 16 2z" fill="#F2501A"/><rect x="11" y="9" width="10" height="9" rx="1.5" fill="#fff"/></svg><span>Delivery<b>Pin</b></span></p>
+      <p>Abdul Moiz · <a href="#" id="wa-foot" target="_blank" rel="noopener" data-cta="whatsapp">WhatsApp +92 334 5251333</a> · <a href="mailto:thecrestnova@gmail.com">thecrestnova@gmail.com</a></p>
+    </div>
+    <p class="fine">This page uses no cookies. It counts visits, video plays and form steps anonymously so we know what's useful. Map data © OpenStreetMap contributors. Demo data only: Ayesha Khan is not a real customer.</p>
+  </div>
+</footer>
+
+<a class="sticky-cta" id="sticky" href="#pilot" data-cta="sticky">Join the pilot</a>
+
+<script src="vendor/qrcode.js" defer></script>
+<script src="app.js" defer></script>
+</body>
+</html>
