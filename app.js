@@ -39,7 +39,7 @@
   track("open", document.referrer ? new URL(document.referrer).hostname : "direct");
 
   const waLink = (text) => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(text)}`;
-  const waDefault = waLink(`Assalam o Alaikum Moiz, I saw the DeliveryPin pilot page${agency ? ` (${agency.agency})` : ""}.`);
+  const waDefault = waLink(`Assalam o Alaikum Crestnova, I saw the DeliveryPin pilot page${agency ? ` (${agency.agency})` : ""}.`);
   for (const id of ["#wa-next", "#wa-foot"]) { const a = $(id); if (a) a.href = waDefault; }
   document.addEventListener("click", (event) => {
     const target = event.target.closest("[data-cta]");
@@ -296,7 +296,7 @@
       lead.hidden = true; details.hidden = false;
       details.email.focus({ preventScroll: true });
     } catch {
-      showError(error, "We couldn't save that just now.", waLink(`Assalam o Alaikum Moiz, I'm ${name} from ${agencyName}. I'd like to join the DeliveryPin pilot.`));
+      showError(error, "We couldn't save that just now.", waLink(`Assalam o Alaikum Crestnova, I'm ${name} from ${agencyName}. I'd like to join the DeliveryPin pilot.`));
     } finally {
       clearTimeout(slow);
       button.disabled = false; button.textContent = "Join the pilot";
@@ -305,7 +305,7 @@
 
   function finish() {
     details.hidden = true; next.hidden = false;
-    $("#wa-next").href = waLink(`Assalam o Alaikum Moiz, I'm ${leadName} from ${leadAgency}. I just joined the DeliveryPin pilot (${leadId}).`);
+    $("#wa-next").href = waLink(`Assalam o Alaikum Crestnova, I'm ${leadName} from ${leadAgency}. I just joined the DeliveryPin pilot (${leadId}).`);
     $("#next-ref").textContent = `Your reference: ${leadId}`;
     sticky.remove();
     next.scrollIntoView({ block: "nearest", behavior: "smooth" });
@@ -323,7 +323,7 @@
       track("details");
       finish();
     } catch {
-      showError($("#details-error"), "Your seat is saved, but these details didn't send.", waLink(`Assalam o Alaikum Moiz, ${leadName} from ${leadAgency} (${leadId}). Brands: ${body.brands}. Orders/month: ${body.orders}. Couriers: ${body.couriers}. Main problem: ${body.problem}`));
+      showError($("#details-error"), "Your seat is saved, but these details didn't send.", waLink(`Assalam o Alaikum Crestnova, ${leadName} from ${leadAgency} (${leadId}). Brands: ${body.brands}. Orders/month: ${body.orders}. Couriers: ${body.couriers}. Main problem: ${body.problem}`));
     } finally {
       button.disabled = false; button.textContent = "Send details";
     }
