@@ -2,7 +2,7 @@
   "use strict";
 
   // Google Apps Script web app URL (see marketing/pilot-backend/Code.gs). Empty: the form falls back to WhatsApp.
-  const ENDPOINT = "";
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbwmIqcdA8RkcN_R72pQu6njb-L02fIJS8QjAHhVNjtxoeX45uqCajFAgcVqN2l13lHr6Q/exec";
   const WHATSAPP = "923345251333";
   const PAGE = "pilot-v1";
 
