@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ur" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -128,8 +128,8 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
       <span>Delivery <b>Pin</b></span>
     </span>
     <div class="lang" role="group" aria-label="Language">
-      <button type="button" lang="ur" data-lang="ur" aria-pressed="true">اردو</button>
-      <button type="button" lang="en" data-lang="en" aria-pressed="false">English</button>
+      <button type="button" lang="ur" data-lang="ur" aria-pressed="false">اردو</button>
+      <button type="button" lang="en" data-lang="en" aria-pressed="true">English</button>
     </div>
   </header>
 
@@ -285,7 +285,7 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
   const store = (key) => { try { return localStorage.getItem(key); } catch (e) { return null; } };
   const save = (key, value) => { try { localStorage.setItem(key, value); } catch (e) {} };
 
-  let lang = params.get("lang") === "en" ? "en" : (store("dp-feedback-lang") === "en" ? "en" : "ur");
+  let lang = params.get("lang") === "ur" ? "ur" : (params.get("lang") === "en" ? "en" : (store("dp-feedback-lang") === "ur" ? "ur" : "en"));
   let rating = 0;
   let photo = null; // JPEG data URL, already shrunk
 
