@@ -147,6 +147,7 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
         <div class="scale" aria-hidden="true"><span data-t="scaleLow"></span><span data-t="scaleHigh"></span></div>
       </fieldset>
 
+      <!--
       <fieldset class="card" style="border:1px solid var(--line);margin:0 0 12px">
         <legend class="q"><span>2. </span><span data-t="q2"></span></legend>
         <div class="choices">
@@ -155,26 +156,27 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
           <label class="choice"><input type="radio" name="rider" value="called_a_lot"><span data-t="riderLot"></span></label>
         </div>
       </fieldset>
+      -->
 
       <div class="card">
-        <label class="q" for="confusing"><span>3. </span><span data-t="q3"></span> <span class="opt-tag" data-t="optional"></span></label>
+        <label class="q" for="confusing"><span>2. </span><span data-t="q3"></span> <span class="opt-tag" data-t="optional"></span></label>
         <textarea id="confusing" name="confusing" maxlength="1000" data-ph="q3ph"></textarea>
       </div>
 
       <div class="card">
-        <label class="q" for="testimonial"><span>4. </span><span data-t="q4"></span> <span class="opt-tag" data-t="optional"></span></label>
+        <label class="q" for="testimonial"><span>3. </span><span data-t="q4"></span> <span class="opt-tag" data-t="optional"></span></label>
         <textarea id="testimonial" name="testimonial" maxlength="300" data-ph="q4ph" style="min-height:72px"></textarea>
       </div>
 
       <div class="card">
         <label class="consent">
           <input type="checkbox" id="consent" name="consent">
-          <span><b>5. </b><span data-t="consent"></span><br><span class="hint" data-t="consentFine"></span></span>
+          <span><b>4. </b><span data-t="consent"></span><br><span class="hint" data-t="consentFine"></span></span>
         </label>
       </div>
 
       <div class="card">
-        <p class="q"><span>6. </span><span data-t="about"></span> <span class="opt-tag" data-t="optional"></span></p>
+        <p class="q"><span>5. </span><span data-t="about"></span> <span class="opt-tag" data-t="optional"></span></p>
         <div class="row">
           <div class="field"><label for="first-name" data-t="firstName"></label><input type="text" id="first-name" name="firstName" maxlength="40" autocomplete="given-name"></div>
           <div class="field"><label for="city" data-t="city"></label><input type="text" id="city" name="city" maxlength="60" autocomplete="address-level2"></div>
@@ -225,8 +227,8 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
       scaleLow: "Very hard", scaleHigh: "Very easy",
       words: ["Very hard", "Hard", "OK", "Easy", "Very easy"],
       starOf: "{n} of 5",
-      q2: "Did the rider find you without calling for directions?",
-      riderNo: "Yes, no call needed", riderOnce: "Had to call once", riderLot: "Had to call a lot",
+      // q2: "Did the rider find you without calling for directions?",
+      // riderNo: "Yes, no call needed", riderOnce: "Had to call once", riderLot: "Had to call a lot",
       q3: "What was confusing, if anything?",
       q3ph: "e.g. the map was slow, I couldn't find my street…",
       q4: "One line you'd tell a friend about it",
@@ -239,7 +241,7 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
       photo: "Photo of your parcel", addPhoto: "Add a photo", removePhoto: "Remove photo",
       submit: "Send feedback", sending: "Sending…",
       errRating: "Please choose a star rating.",
-      errRider: "Please answer the rider question.",
+      // errRider: "Please answer the rider question.",
       errSend: "Couldn't send. Check your connection and try again.",
       errPhoto: "That photo couldn't be read. Try another one.",
       privacy: "We never show your phone number or address.",
@@ -254,8 +256,8 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
       scaleLow: "بہت مشکل", scaleHigh: "بہت آسان",
       words: ["بہت مشکل", "مشکل", "ٹھیک", "آسان", "بہت آسان"],
       starOf: "5 میں سے {n}",
-      q2: "کیا رائیڈر نے راستہ پوچھنے کے لیے کال کیے بغیر آپ کو ڈھونڈ لیا؟",
-      riderNo: "جی ہاں، کال کی ضرورت نہیں پڑی", riderOnce: "ایک بار کال کرنی پڑی", riderLot: "کئی بار کال کرنی پڑی",
+      // q2: "کیا رائیڈر نے راستہ پوچھنے کے لیے کال کیے بغیر آپ کو ڈھونڈ لیا؟",
+      // riderNo: "جی ہاں، کال کی ضرورت نہیں پڑی", riderOnce: "ایک بار کال کرنی پڑی", riderLot: "کئی بار کال کرنی پڑی",
       q3: "اگر کوئی چیز سمجھنے میں مشکل لگی تو وہ کیا تھی؟",
       q3ph: "مثلاً نقشہ آہستہ کھلا، اپنی گلی نہیں مل رہی تھی…",
       q4: "اس کے بارے میں کسی دوست کو ایک جملے میں کیا بتائیں گے؟",
@@ -268,7 +270,7 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
       photo: "اپنے پارسل کی تصویر", addPhoto: "تصویر شامل کریں", removePhoto: "تصویر ہٹائیں",
       submit: "رائے بھیجیں", sending: "بھیجا جا رہا ہے…",
       errRating: "براہ کرم ستاروں سے ریٹنگ دیں۔",
-      errRider: "براہ کرم رائیڈر والے سوال کا جواب دیں۔",
+      // errRider: "براہ کرم رائیڈر والے سوال کا جواب دیں۔",
       errSend: "رائے نہیں بھیجی جا سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔",
       errPhoto: "یہ تصویر نہیں کھل سکی۔ کوئی اور تصویر آزمائیں۔",
       privacy: "ہم آپ کا فون نمبر یا پتا کبھی ظاہر نہیں کریں گے۔",
@@ -370,7 +372,7 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
     const form = event.currentTarget;
     const rider = (form.querySelector('input[name="rider"]:checked') || {}).value || "";
     if (!rating) { showError("errRating"); $("star-1").focus(); return; }
-    if (!rider) { showError("errRider"); form.querySelector('input[name="rider"]').focus(); return; }
+    // if (!rider) { showError("errRider"); form.querySelector('input[name="rider"]').focus(); return; }
     hideError();
 
     const body = {
