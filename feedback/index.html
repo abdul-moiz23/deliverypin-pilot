@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Delivery Pin Feedback</title>
+<meta name="description" content="Tell us how pinning your delivery location went. It takes under a minute.">
+<meta name="theme-color" content="#F5F7FA">
+<meta name="color-scheme" content="light">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="How was pinning your location?">
+<meta property="og:description" content="One minute of feedback on Delivery Pin.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2C9.4 2 4 7.2 4 13.7 4 22.4 16 30 16 30s12-7.6 12-16.3C28 7.2 22.6 2 16 2z' fill='%23F2501A'/%3E%3Crect x='11' y='9' width='10' height='9' rx='1.5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap">
+<style>
+:root {
+  --accent: #F2501A;
+  --accent-ink: #C83C0C;
+  --ink: #101828;
+  --ink-2: #344054;
+  --ink-3: #667085;
+  --set: #F5F7FA;
+  --card: #FFFFFF;
+  --line: #E4E7EC;
+  --soft: #FDEEE8;
+  --star: #F5A524;
+  --error: #B42318;
+  --display: Bahnschrift, "Barlow Semi Condensed", "DIN Alternate", "Arial Narrow", sans-serif;
+  --ui: "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --urdu: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", "Urdu Typesetting", serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--set); color: var(--ink); font: 400 17px/1.55 var(--ui); }
+[lang="ur"] body, body[lang="ur"] { font-family: var(--urdu); line-height: 2.1; font-size: 17px; }
+h1, h2, p { margin: 0; }
+.wrap { max-width: 560px; margin: 0 auto; padding: 0 16px; }
+
+.top { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+.brand { display: inline-flex; align-items: center; gap: 8px; font: 700 20px/1 var(--display); color: var(--ink); direction: ltr; }
+.brand b { color: var(--accent); font-weight: 700; }
+.lang { display: inline-flex; background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 3px; direction: ltr; }
+.lang button { border: 0; background: none; font: 600 14px/1 var(--ui); color: var(--ink-3); padding: 8px 14px; border-radius: 999px; cursor: pointer; min-height: 36px; }
+.lang button[lang="ur"] { font-family: var(--urdu); font-size: 15px; line-height: 1; padding-top: 4px; padding-bottom: 10px; }
+.lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+
+.intro { padding: 12px 0 20px; }
+h1 { font-size: 28px; line-height: 1.2; font-weight: 700; }
+[lang="ur"] h1 { font-size: 26px; line-height: 1.9; font-weight: 600; }
+.lede { margin-top: 8px; color: var(--ink-2); }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px 16px; margin-bottom: 12px; }
+fieldset.card { min-width: 0; }
+.q { display: block; font-weight: 650; font-size: 18px; line-height: 1.35; padding: 0; margin-bottom: 12px; }
+[lang="ur"] .q { font-weight: 600; line-height: 2; }
+legend.q { float: inline-start; width: 100%; }
+legend.q + * { clear: both; }
+.opt-tag { font-weight: 400; font-size: 14px; color: var(--ink-3); }
+.hint { font-size: 14px; color: var(--ink-3); margin-top: 6px; }
+
+/* Stars: always 1..5 left to right */
+.stars { display: flex; gap: 6px; direction: ltr; justify-content: center; }
+.stars input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.stars label { cursor: pointer; padding: 4px; border-radius: 10px; line-height: 0; }
+.stars svg { width: 48px; height: 48px; fill: var(--line); transition: fill .12s ease, transform .12s ease; }
+.stars label.on svg { fill: var(--star); }
+.stars label:active svg { transform: scale(.92); }
+.stars input:focus-visible + label { outline: 3px solid rgba(242, 80, 26, .45); }
+.rating-word { text-align: center; min-height: 1.6em; margin-top: 4px; font-weight: 600; color: var(--ink-2); }
+.scale { display: flex; justify-content: space-between; direction: ltr; font-size: 13px; color: var(--ink-3); max-width: 300px; margin: 2px auto 0; }
+
+.choices { display: grid; gap: 8px; }
+.choice { position: relative; }
+.choice input { position: absolute; opacity: 0; }
+.choice span { display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 10px 14px; border: 1.5px solid var(--line); border-radius: 12px; cursor: pointer; }
+.choice span::before { content: ""; flex: none; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--line); background: #fff; }
+.choice input:checked + span { border-color: var(--accent); background: var(--soft); }
+.choice input:checked + span::before { border: 6px solid var(--accent); }
+.choice input:focus-visible + span { outline: 3px solid rgba(242, 80, 26, .45); outline-offset: 2px; }
+
+textarea, input[type="text"] { width: 100%; font: inherit; color: var(--ink); background: #fff; border: 1.5px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+textarea { min-height: 96px; resize: vertical; }
+textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(242, 80, 26, .18); }
+.field + .field { margin-top: 14px; }
+.field label { display: block; font-weight: 600; font-size: 15px; margin-bottom: 6px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.photo-pick { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; border: 1.5px dashed var(--line); border-radius: 12px; cursor: pointer; color: var(--ink-2); font-weight: 600; }
+.photo-pick:hover { border-color: var(--accent); }
+.photo-pick input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.photo-pick:focus-within { outline: 3px solid rgba(242, 80, 26, .45); }
+.preview { display: flex; align-items: center; gap: 12px; }
+.preview img { width: 88px; height: 88px; object-fit: cover; border-radius: 10px; border: 1px solid var(--line); }
+.link-btn { background: none; border: 0; color: var(--accent-ink); font: inherit; font-weight: 600; text-decoration: underline; cursor: pointer; padding: 8px 0; }
+
+.consent { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
+.consent input { flex: none; width: 22px; height: 22px; margin: 4px 0 0; accent-color: var(--accent); }
+[lang="ur"] .consent input { margin-top: 10px; }
+.consent b { font-weight: 600; }
+
+.btn { display: flex; align-items: center; justify-content: center; width: 100%; min-height: 56px; border: 0; border-radius: 12px; background: var(--accent); color: #fff; font: 650 18px/1 var(--ui); cursor: pointer; margin-top: 8px; }
+[lang="ur"] .btn { font-family: var(--urdu); font-weight: 600; padding-bottom: 8px; }
+.btn:hover { background: var(--accent-ink); }
+.btn[disabled] { opacity: .6; cursor: progress; }
+.btn:focus-visible { outline: 3px solid rgba(242, 80, 26, .45); outline-offset: 2px; }
+.error { color: var(--error); font-weight: 600; margin-top: 10px; text-align: center; }
+.fine { font-size: 13.5px; color: var(--ink-3); text-align: center; margin: 16px 0 32px; }
+/* Visually hidden; no offset, which in RTL would widen the page */
+.hp { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.thanks { text-align: center; padding: 40px 0 24px; }
+.thanks .tick { width: 72px; height: 72px; margin: 0 auto 16px; border-radius: 50%; background: var(--soft); display: grid; place-items: center; }
+.thanks .tick svg { width: 36px; height: 36px; stroke: var(--accent); }
+.thanks p { margin-top: 8px; color: var(--ink-2); }
+[hidden] { display: none !important; }
+
+@media (max-width: 360px) { .stars svg { width: 42px; height: 42px; } .row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="brand">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true"><path d="M16 2C9.4 2 4 7.2 4 13.7 4 22.4 16 30 16 30s12-7.6 12-16.3C28 7.2 22.6 2 16 2z" fill="#F2501A"/><rect x="11" y="9" width="10" height="9" rx="1.5" fill="#fff"/></svg>
+      <span>Delivery <b>Pin</b></span>
+    </span>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" lang="ur" data-lang="ur" aria-pressed="true">اردو</button>
+      <button type="button" lang="en" data-lang="en" aria-pressed="false">English</button>
+    </div>
+  </header>
+
+  <main id="form-view">
+    <div class="intro">
+      <h1 data-t="title"></h1>
+      <p class="lede" data-t="intro"></p>
+    </div>
+
+    <form id="feedback" novalidate>
+      <fieldset class="card" style="border:1px solid var(--line);margin:0 0 12px">
+        <legend class="q"><span>1. </span><span data-t="q1"></span></legend>
+        <div class="stars" id="stars"></div>
+        <p class="rating-word" id="rating-word" aria-live="polite"></p>
+        <div class="scale" aria-hidden="true"><span data-t="scaleLow"></span><span data-t="scaleHigh"></span></div>
+      </fieldset>
+
+      <fieldset class="card" style="border:1px solid var(--line);margin:0 0 12px">
+        <legend class="q"><span>2. </span><span data-t="q2"></span></legend>
+        <div class="choices">
+          <label class="choice"><input type="radio" name="rider" value="no_call"><span data-t="riderNo"></span></label>
+          <label class="choice"><input type="radio" name="rider" value="called_once"><span data-t="riderOnce"></span></label>
+          <label class="choice"><input type="radio" name="rider" value="called_a_lot"><span data-t="riderLot"></span></label>
+        </div>
+      </fieldset>
+
+      <div class="card">
+        <label class="q" for="confusing"><span>3. </span><span data-t="q3"></span> <span class="opt-tag" data-t="optional"></span></label>
+        <textarea id="confusing" name="confusing" maxlength="1000" data-ph="q3ph"></textarea>
+      </div>
+
+      <div class="card">
+        <label class="q" for="testimonial"><span>4. </span><span data-t="q4"></span> <span class="opt-tag" data-t="optional"></span></label>
+        <textarea id="testimonial" name="testimonial" maxlength="300" data-ph="q4ph" style="min-height:72px"></textarea>
+      </div>
+
+      <div class="card">
+        <label class="consent">
+          <input type="checkbox" id="consent" name="consent">
+          <span><b>5. </b><span data-t="consent"></span><br><span class="hint" data-t="consentFine"></span></span>
+        </label>
+      </div>
+
+      <div class="card">
+        <p class="q"><span>6. </span><span data-t="about"></span> <span class="opt-tag" data-t="optional"></span></p>
+        <div class="row">
+          <div class="field"><label for="first-name" data-t="firstName"></label><input type="text" id="first-name" name="firstName" maxlength="40" autocomplete="given-name"></div>
+          <div class="field"><label for="city" data-t="city"></label><input type="text" id="city" name="city" maxlength="60" autocomplete="address-level2"></div>
+        </div>
+        <div class="field">
+          <span style="display:block;font-weight:600;font-size:15px;margin-bottom:6px" data-t="photo"></span>
+          <label class="photo-pick" id="photo-pick">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h3l2-3h6l2 3h3v13H4z"/><circle cx="12" cy="13" r="4"/></svg>
+            <span data-t="addPhoto"></span>
+            <input type="file" id="photo" accept="image/*">
+          </label>
+          <div class="preview" id="preview" hidden>
+            <img id="preview-img" alt="">
+            <button type="button" class="link-btn" id="remove-photo" data-t="removePhoto"></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+
+      <button class="btn" type="submit" id="submit" data-t="submit"></button>
+      <p class="error" id="error" role="alert" hidden></p>
+      <p class="fine" data-t="privacy"></p>
+    </form>
+  </main>
+
+  <main id="thanks-view" class="thanks" hidden>
+    <div class="tick"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+    <h1 data-t="thanksTitle" tabindex="-1"></h1>
+    <p data-t="thanksBody"></p>
+  </main>
+</div>
+
+<script>
+(() => {
+  // Same Apps Script web app as the pilot page (marketing/pilot-backend/Code.gs handles type "feedback").
+  const ENDPOINT = "https://script.google.com/macros/s/AKfycbwmIqcdA8RkcN_R72pQu6njb-L02fIJS8QjAHhVNjtxoeX45uqCajFAgcVqN2l13lHr6Q/exec";
+  const PAGE = "feedback-v1";
+  // Link format: .../feedback/?s=alayajunior&o=1234  (s = store key below, o = order number or your own ref)
+  const STORES = { alayajunior: { en: "Alaya Junior", ur: "Alaya Junior" } };
+
+  const T = {
+    en: {
+      title: "How was pinning your location?",
+      intro: "You recently ordered from {store} and pinned your delivery location on a map. Your answers help us make it easier. It takes under a minute.",
+      storeFallback: "an online store",
+      q1: "How easy was it to pin your location?",
+      scaleLow: "Very hard", scaleHigh: "Very easy",
+      words: ["Very hard", "Hard", "OK", "Easy", "Very easy"],
+      starOf: "{n} of 5",
+      q2: "Did the rider find you without calling for directions?",
+      riderNo: "Yes, no call needed", riderOnce: "Had to call once", riderLot: "Had to call a lot",
+      q3: "What was confusing, if anything?",
+      q3ph: "e.g. the map was slow, I couldn't find my street…",
+      q4: "One line you'd tell a friend about it",
+      q4ph: "e.g. The rider came straight to my door.",
+      optional: "(optional)",
+      consent: "Delivery Pin may show my first name, city and this comment publicly.",
+      consentFine: "Leave this unticked and we'll only use your answers to improve the app.",
+      about: "About you",
+      firstName: "First name", city: "City",
+      photo: "Photo of your parcel", addPhoto: "Add a photo", removePhoto: "Remove photo",
+      submit: "Send feedback", sending: "Sending…",
+      errRating: "Please choose a star rating.",
+      errRider: "Please answer the rider question.",
+      errSend: "Couldn't send. Check your connection and try again.",
+      errPhoto: "That photo couldn't be read. Try another one.",
+      privacy: "We never show your phone number or address.",
+      thanksTitle: "Thank you!",
+      thanksBody: "Your feedback helps make deliveries easier for everyone.",
+    },
+    ur: {
+      title: "لوکیشن پن کرنے کا تجربہ کیسا رہا؟",
+      intro: "آپ نے حال ہی میں {store} سے آرڈر کیا اور نقشے پر اپنی ڈیلیوری لوکیشن پن کی۔ آپ کے جوابات اسے مزید آسان بنانے میں ہماری مدد کریں گے۔ اس میں ایک منٹ سے بھی کم وقت لگے گا۔",
+      storeFallback: "ایک آن لائن اسٹور",
+      q1: "اپنی لوکیشن پن کرنا کتنا آسان تھا؟",
+      scaleLow: "بہت مشکل", scaleHigh: "بہت آسان",
+      words: ["بہت مشکل", "مشکل", "ٹھیک", "آسان", "بہت آسان"],
+      starOf: "5 میں سے {n}",
+      q2: "کیا رائیڈر نے راستہ پوچھنے کے لیے کال کیے بغیر آپ کو ڈھونڈ لیا؟",
+      riderNo: "جی ہاں، کال کی ضرورت نہیں پڑی", riderOnce: "ایک بار کال کرنی پڑی", riderLot: "کئی بار کال کرنی پڑی",
+      q3: "اگر کوئی چیز سمجھنے میں مشکل لگی تو وہ کیا تھی؟",
+      q3ph: "مثلاً نقشہ آہستہ کھلا، اپنی گلی نہیں مل رہی تھی…",
+      q4: "اس کے بارے میں کسی دوست کو ایک جملے میں کیا بتائیں گے؟",
+      q4ph: "مثلاً رائیڈر سیدھا میرے دروازے تک آ گیا۔",
+      optional: "(اختیاری)",
+      consent: "Delivery Pin میرا پہلا نام، شہر اور یہ رائے عوامی طور پر دکھا سکتا ہے۔",
+      consentFine: "اگر آپ یہ نشان نہ لگائیں تو ہم آپ کے جوابات صرف ایپ کو بہتر بنانے کے لیے استعمال کریں گے۔",
+      about: "آپ کے بارے میں",
+      firstName: "پہلا نام", city: "شہر",
+      photo: "اپنے پارسل کی تصویر", addPhoto: "تصویر شامل کریں", removePhoto: "تصویر ہٹائیں",
+      submit: "رائے بھیجیں", sending: "بھیجا جا رہا ہے…",
+      errRating: "براہ کرم ستاروں سے ریٹنگ دیں۔",
+      errRider: "براہ کرم رائیڈر والے سوال کا جواب دیں۔",
+      errSend: "رائے نہیں بھیجی جا سکی۔ انٹرنیٹ چیک کر کے دوبارہ کوشش کریں۔",
+      errPhoto: "یہ تصویر نہیں کھل سکی۔ کوئی اور تصویر آزمائیں۔",
+      privacy: "ہم آپ کا فون نمبر یا پتا کبھی ظاہر نہیں کریں گے۔",
+      thanksTitle: "شکریہ!",
+      thanksBody: "آپ کی رائے سب کے لیے ڈیلیوری کو آسان بنانے میں مدد کرتی ہے۔",
+    },
+  };
+
+  const params = new URLSearchParams(location.search);
+  const storeKey = (params.get("s") || "").toLowerCase().replace(/[^a-z0-9-]/g, "").slice(0, 40);
+  const orderRef = (params.get("o") || "").replace(/[^\w#-]/g, "").slice(0, 30);
+  const doneKey = "dp-feedback:" + storeKey + ":" + orderRef;
+  const loadedAt = Date.now();
+  const store = (key) => { try { return localStorage.getItem(key); } catch (e) { return null; } };
+  const save = (key, value) => { try { localStorage.setItem(key, value); } catch (e) {} };
+
+  let lang = params.get("lang") === "en" ? "en" : (store("dp-feedback-lang") === "en" ? "en" : "ur");
+  let rating = 0;
+  let photo = null; // JPEG data URL, already shrunk
+
+  const $ = (id) => document.getElementById(id);
+  const t = (key) => T[lang][key];
+
+  // Stars
+  const starPath = "M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z";
+  for (let n = 1; n <= 5; n++) {
+    const input = document.createElement("input");
+    Object.assign(input, { type: "radio", name: "rating", value: String(n), id: "star-" + n });
+    const label = document.createElement("label");
+    label.htmlFor = input.id;
+    label.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + starPath + '"/></svg><span class="hp"></span>';
+    input.addEventListener("change", () => { rating = n; paintStars(); hideError(); });
+    $("stars").append(input, label);
+  }
+  function paintStars() {
+    $("stars").querySelectorAll("label").forEach((label, i) => label.classList.toggle("on", i < rating));
+    $("rating-word").textContent = rating ? t("words")[rating - 1] : "";
+  }
+
+  function render() {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === "ur" ? "rtl" : "ltr";
+    const storeName = STORES[storeKey] ? STORES[storeKey][lang] : t("storeFallback");
+    document.querySelectorAll("[data-t]").forEach((el) => { el.textContent = t(el.dataset.t).replace("{store}", storeName); });
+    document.querySelectorAll("[data-ph]").forEach((el) => { el.placeholder = t(el.dataset.ph); });
+    $("stars").querySelectorAll("label .hp").forEach((span, i) => { span.textContent = t("starOf").replace("{n}", i + 1); });
+    document.querySelectorAll(".lang button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    paintStars();
+    if (!$("error").hidden && $("error").dataset.key) $("error").textContent = t($("error").dataset.key);
+  }
+  document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => {
+    lang = b.dataset.lang; save("dp-feedback-lang", lang); render();
+  }));
+
+  function showError(key) { const el = $("error"); el.dataset.key = key; el.textContent = t(key); el.hidden = false; }
+  function hideError() { $("error").hidden = true; }
+  document.querySelectorAll('input[name="rider"]').forEach((r) => r.addEventListener("change", hideError));
+
+  // Photo: shrink to at most 1280px JPEG in the browser so the upload stays small on mobile data.
+  $("photo").addEventListener("change", async () => {
+    const file = $("photo").files[0];
+    $("photo").value = "";
+    if (!file) return;
+    try {
+      photo = await shrink(file, 1280, 0.8);
+      $("preview-img").src = photo;
+      $("preview").hidden = false;
+      $("photo-pick").hidden = true;
+      hideError();
+    } catch (e) {
+      photo = null;
+      showError("errPhoto");
+    }
+  });
+  $("remove-photo").addEventListener("click", () => {
+    photo = null; $("preview").hidden = true; $("photo-pick").hidden = false; $("preview-img").removeAttribute("src");
+  });
+  function shrink(file, max, quality) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(1, max / Math.max(img.naturalWidth, img.naturalHeight));
+        const canvas = document.createElement("canvas");
+        canvas.width = Math.round(img.naturalWidth * scale);
+        canvas.height = Math.round(img.naturalHeight * scale);
+        canvas.getContext("2d").drawImage(img, 0, 0, canvas.width, canvas.height);
+        URL.revokeObjectURL(url);
+        const data = canvas.toDataURL("image/jpeg", quality);
+        data.length > 50 ? resolve(data) : reject(new Error("empty"));
+      };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("decode")); };
+      img.src = url;
+    });
+  }
+
+  $("feedback").addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const rider = (form.querySelector('input[name="rider"]:checked') || {}).value || "";
+    if (!rating) { showError("errRating"); $("star-1").focus(); return; }
+    if (!rider) { showError("errRider"); form.querySelector('input[name="rider"]').focus(); return; }
+    hideError();
+
+    const body = {
+      type: "feedback", page: PAGE, lang, store: storeKey, order: orderRef,
+      rating, rider,
+      confusing: form.confusing.value.trim(),
+      testimonial: form.testimonial.value.trim(),
+      consent: form.consent.checked,
+      firstName: form.firstName.value.trim(),
+      city: form.city.value.trim(),
+      photo,
+      website: form.website.value,
+      elapsed: Date.now() - loadedAt,
+    };
+    const button = $("submit");
+    button.disabled = true; button.textContent = t("sending");
+    try {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 30000);
+      const response = await fetch(ENDPOINT, { method: "POST", body: JSON.stringify(body), headers: { "Content-Type": "text/plain;charset=utf-8" }, signal: controller.signal });
+      clearTimeout(timer);
+      const result = await response.json();
+      if (!result.ok) throw new Error(result.error || "failed");
+      save(doneKey, "1");
+      showThanks();
+    } catch (e) {
+      showError("errSend");
+    } finally {
+      button.disabled = false; button.textContent = t("submit");
+    }
+  });
+
+  function showThanks() {
+    $("form-view").hidden = true;
+    $("thanks-view").hidden = false;
+    window.scrollTo(0, 0);
+    $("thanks-view").querySelector("h1").focus();
+  }
+
+  render();
+  if (orderRef && store(doneKey)) showThanks();
+})();
+</script>
+</body>
+</html>
