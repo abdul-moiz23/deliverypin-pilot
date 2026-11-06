@@ -285,7 +285,7 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
   const store = (key) => { try { return localStorage.getItem(key); } catch (e) { return null; } };
   const save = (key, value) => { try { localStorage.setItem(key, value); } catch (e) {} };
 
-  let lang = params.get("lang") === "ur" ? "ur" : (params.get("lang") === "en" ? "en" : (store("dp-feedback-lang") === "ur" ? "ur" : "en"));
+  let lang = params.get("lang") === "ur" ? "ur" : "en";
   let rating = 0;
   let photo = null; // JPEG data URL, already shrunk
 
@@ -320,7 +320,7 @@ textarea:focus, input[type="text"]:focus { outline: none; border-color: var(--ac
     if (!$("error").hidden && $("error").dataset.key) $("error").textContent = t($("error").dataset.key);
   }
   document.querySelectorAll(".lang button").forEach((b) => b.addEventListener("click", () => {
-    lang = b.dataset.lang; save("dp-feedback-lang", lang); render();
+    lang = b.dataset.lang; render();
   }));
 
   function showError(key) { const el = $("error"); el.dataset.key = key; el.textContent = t(key); el.hidden = false; }
